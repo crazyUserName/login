@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ch" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"/>
+<title>登录</title>
+</head>
+<body>
+<form id="loginForm" action="#" method="post">
+	<div>
+	<input type="text" id="userName" name="userName" class="form-control" placeholder="用户名" />
+	</div>
+	<div>
+    <input type="password" id="password" name="password" class="form-control" placeholder="密码" /> 
+    </div>
+    <div>
+	<button type="button" id="sub" class="width-35 pull-right btn btn-sm btn-primary">
+		<span class="bigger-110">登录</span>
+	</button>
+	</div>
+</form>
+<input type="hidden" id="publicKey" th:value="${publicKey}" />
+<script src="../static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+<script src="../static/js/jsencrypt.min.js" th:src="@{/js/jsencrypt.min.js}"></script>
+<script src="../static/js/login.js" th:src="@{/js/login.js}"></script>
+</body>
+</html>

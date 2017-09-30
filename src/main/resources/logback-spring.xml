@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Logback configuration. See http://logback.qos.ch/manual/index.html -->
+<configuration scan="true" scanPeriod="10 seconds">
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+    
+      <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符
+	  <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+    	-->
+    
+    <property name="FILE_LOG_PATTERN" value="[%d] [%-5p] [%-16.16t] [%-32F\:%-3L] - %m%n"/>
+
+ 	<springProfile name="dev">
+	</springProfile>
+	
+	<springProfile name="test,proc">
+	    <appender name="DEBUG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	    	<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+	            <level>DEBUG</level>
+	        </filter>
+	        <File>${catalina.home:-.}/logs/hyperPacer_debug.log</File>
+	        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	            <fileNamePattern>${catalina.home:-.}/logs/hyperPacer_debug-%d{yyyyMMdd}.log.%i</fileNamePattern>
+	            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+	                <maxFileSize>500MB</maxFileSize>
+	            </timeBasedFileNamingAndTriggeringPolicy>
+	            <maxHistory>30</maxHistory>
+	        </rollingPolicy>
+	        <layout class="ch.qos.logback.classic.PatternLayout">
+	            <Pattern>${FILE_LOG_PATTERN}
+	            </Pattern>
+	        </layout>
+	    </appender>
+	
+	    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+	            <level>ERROR</level>
+	        </filter>
+	        <File>${catalina.home:-.}/logs/hyperPacer_error.log</File>
+	        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	            <fileNamePattern>${catalina.home:-.}/logs/hyperPacer_error-%d{yyyyMMdd}.log.%i
+	            </fileNamePattern>
+	            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+	                <maxFileSize>500MB</maxFileSize>
+	            </timeBasedFileNamingAndTriggeringPolicy>
+	            <maxHistory>30</maxHistory>
+	        </rollingPolicy>
+	        <layout class="ch.qos.logback.classic.PatternLayout">
+	            <Pattern>${FILE_LOG_PATTERN}
+	            </Pattern>
+	        </layout>
+	    </appender>
+	
+	    <root level="INFO">
+	        <appender-ref ref="DEBUG_FILE" />
+	        <appender-ref ref="ERROR_FILE" />
+	    </root>
+    </springProfile>
+    
+</configuration>
