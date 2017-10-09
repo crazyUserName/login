@@ -1,4 +1,4 @@
-package com.kou.util;
+package cn.learncoding.util;
 
 import java.security.InvalidKeyException;
 import java.security.KeyFactory;

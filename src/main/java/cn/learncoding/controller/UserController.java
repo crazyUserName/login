@@ -1,4 +1,4 @@
-package com.kou.controller;
+package cn.learncoding.controller;
 
 import java.security.PrivateKey;
 import java.util.Map;
@@ -14,14 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.kou.util.Base64Util;
-import com.kou.util.RSAUtil;
-import com.kou.util.SHAUtil;
-import com.kou.vo.DataVO;
+import cn.learncoding.util.Base64Util;
+import cn.learncoding.util.RSAUtil;
+import cn.learncoding.util.SHAUtil;
+import cn.learncoding.vo.DataVO;
 
 /**   
  * @Description: TODO
- * @author: koukaiqiang
  * @date:   2017年7月4日 下午6:24:42   
  *     
  */
@@ -45,11 +44,11 @@ public class UserController {
 		password = dealPassword(userName, password, session, false);
 		
 		if (!userName.equals("admin") || !password.equals("123456")) {
-			return new DataVO<>("账号信息不匹配"); 
+			return DataVO.errorData("账号信息不匹配"); 
 		}
 		
 		log.info("user {} login success", userName);
-		return new DataVO<>();
+		return DataVO.successDefaultData();
 	}
 	
 

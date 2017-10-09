@@ -1,4 +1,4 @@
-package com.kou.controller;
+package cn.learncoding.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 /**   
  * @Description: TODO
- * @author: koukaiqiang
  * @date:   2017年7月4日 下午6:46:22   
  *     
  */
